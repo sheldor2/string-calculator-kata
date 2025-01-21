@@ -20,4 +20,14 @@ class StringCalculatorTest {
   void shouldReturnSameNumberForSingleNumberInput(final String input, final int output) {
     assertEquals(output, StringCalculator.add(input));
   }
+
+  @Test
+  void shouldReturnThreeForOneAndTwoNumbers() {
+    assertEquals(3, StringCalculator.add("1,2"));
+  }
+
+  @Test
+  void shouldReturnFiveForTwoAndThreeNumbers() {
+    assertEquals(5, StringCalculator.add("2,3"));
+  }
 }
