@@ -21,13 +21,9 @@ class StringCalculatorTest {
     assertEquals(output, StringCalculator.add(input));
   }
 
-  @Test
-  void shouldReturnThreeForOneAndTwoNumbers() {
-    assertEquals(3, StringCalculator.add("1,2"));
-  }
-
-  @Test
-  void shouldReturnFiveForTwoAndThreeNumbers() {
-    assertEquals(5, StringCalculator.add("2,3"));
+  @ParameterizedTest
+  @CsvSource({"'1,2', 3", "'2,3', 5", "'5,6', 11" })
+  void shouldReturnSumForTwoNumbers(final String input, final int output) {
+    assertEquals(output, StringCalculator.add(input));
   }
 }
