@@ -9,9 +9,7 @@ public class StringCalculator {
       return 0;
     }
     String[] numbers = input.split(",");
-    if (numbers.length == 1) {
-      return Integer.parseInt(numbers[0]);
-    }
+    
     return Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
         .sum();
