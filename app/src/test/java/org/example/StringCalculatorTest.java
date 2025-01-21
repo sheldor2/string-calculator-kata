@@ -26,4 +26,19 @@ class StringCalculatorTest {
   void shouldReturnSumForTwoNumbers(final String input, final int output) {
     assertEquals(output, StringCalculator.add(input));
   }
+
+  @Test
+  void shouldAddThreeNumbers() {
+    assertEquals(6, StringCalculator.add("1,2,3"));
+  }
+
+  @Test
+  void shouldAddFiveNumbers() {
+    assertEquals(15, StringCalculator.add("1,2,3,4,5"));
+  }
+
+  @Test
+  void shouldAddTenNumbers() {
+    assertEquals(55, StringCalculator.add("1,2,3,4,5,6,7,8,9,10"));
+  }
 }

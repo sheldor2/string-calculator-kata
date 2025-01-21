@@ -1,5 +1,7 @@
 package org.example;
 
+import java.util.Arrays;
+
 public class StringCalculator {
 
   public static int add(String input) {
@@ -10,6 +12,8 @@ public class StringCalculator {
     if (numbers.length == 1) {
       return Integer.parseInt(numbers[0]);
     }
-    return Integer.parseInt(numbers[0]) + Integer.parseInt(numbers[1]);
+    return Arrays.stream(numbers)
+        .mapToInt(Integer::parseInt)
+        .sum();
   }
 }
