@@ -12,4 +12,14 @@ class StringCalculatorTest {
   void shouldReturnZeroForEmptyString() {
     assertEquals(0, StringCalculator.add(""));
   }
+
+  @Test
+  void shouldReturnOneForInputStringOne() {
+    assertEquals(1, StringCalculator.add("1"));
+  }
+
+  @Test
+  void shouldReturnTwoForInputStringTwo() {
+    assertEquals(2, StringCalculator.add("2"));
+  }
 }
