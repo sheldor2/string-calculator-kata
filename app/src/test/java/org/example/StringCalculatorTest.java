@@ -47,4 +47,14 @@ class StringCalculatorTest {
   void shouldAddNumbersWithCustomDelimiter() {
     assertEquals(3, StringCalculator.add("//;\n1;2"));
   }
+
+  @Test
+  void shouldAddNumbersWithCustomBracketDelimiter() {
+    assertEquals(12, StringCalculator.add("//(\n1(2(9"));
+  }
+
+  @Test
+  void shouldAddNumbersWithCustomHyphenDelimiter() {
+    assertEquals(7, StringCalculator.add("//-\n4-2-1"));
+  }
 }
