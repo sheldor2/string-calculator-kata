@@ -23,6 +23,7 @@ public class StringCalculator {
 
     return Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
+        .filter(number -> number <= 1000)
         .sum();
   }
 
