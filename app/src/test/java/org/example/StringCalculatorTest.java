@@ -8,6 +8,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 class StringCalculatorTest {
   @Test
@@ -47,5 +48,13 @@ class StringCalculatorTest {
   @CsvSource({"'//;\n1;2', 3", "'//(\n1(2(9', 12", "'//-\n4-2-1', 7"})
   void shouldAddNumbersWithCustomDelimiter() {
     assertEquals(3, StringCalculator.add("//;\n1;2"));
+  }
+
+  @Test
+  void shouldThrowExceptionForNegativeNumber() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      StringCalculator.add("-3,2");
+    });
+    assertEquals("negatives not allowed: -3", exception.getMessage());
   }
 }
