@@ -8,7 +8,13 @@ public class StringCalculator {
     if (input.isEmpty()) {
       return 0;
     }
-    String[] numbers = input.split("[,\n]");
+
+    String delimiter = ",\n";
+    if (input.startsWith("//")) {
+      delimiter = input.substring(2, 3);
+      input = input.substring(4);
+    }
+    String[] numbers = input.split("["+ delimiter +"]");
     
     return Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
