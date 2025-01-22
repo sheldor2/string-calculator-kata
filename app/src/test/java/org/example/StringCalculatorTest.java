@@ -37,4 +37,9 @@ class StringCalculatorTest {
   void shouldAddMultipleNumbers(final String input, final int output) {
     assertEquals(output, StringCalculator.add(input));
   }
+
+  @Test
+  void shouldAddNumbersWithNewLineAsDelimiter() {
+    assertEquals(6, StringCalculator.add("1\n2,3"));
+  }
 }

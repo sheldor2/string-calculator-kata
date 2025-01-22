@@ -8,7 +8,7 @@ public class StringCalculator {
     if (input.isEmpty()) {
       return 0;
     }
-    String[] numbers = input.split(",");
+    String[] numbers = input.split("[,\n]");
     
     return Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
