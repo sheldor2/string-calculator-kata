@@ -1,6 +1,7 @@
 package org.example;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 public class StringCalculator {
@@ -12,11 +13,12 @@ public class StringCalculator {
 
     String[] numbers = getInputNumbers(input);
 
-    Optional<String> negativeNumber = Arrays.stream(numbers)
-        .filter(number -> Integer.parseInt(number) < 0).findAny();
+    List<String> negativeNumbers = Arrays.stream(numbers)
+        .filter(number -> Integer.parseInt(number) < 0).toList();
 
-    if(negativeNumber.isPresent()) {
-      throw new IllegalArgumentException("negatives not allowed: " + negativeNumber.get());
+    if(!negativeNumbers.isEmpty()) {
+      Optional<String> allNegativeNumbers = negativeNumbers.stream().reduce((a, b) -> a + "," + b);
+      throw new IllegalArgumentException("negatives not allowed: " + allNegativeNumbers.get());
     }
 
     return Arrays.stream(numbers)
