@@ -10,12 +10,7 @@ public class StringCalculator {
       return 0;
     }
 
-    String delimiter = ",\n";
-    if (input.startsWith("//")) {
-      delimiter = input.substring(2, 3);
-      input = input.substring(4);
-    }
-    String[] numbers = input.split("["+ delimiter +"]");
+    String[] numbers = getInputNumbers(input);
 
     Optional<String> negativeNumber = Arrays.stream(numbers)
         .filter(number -> Integer.parseInt(number) < 0).findAny();
@@ -27,5 +22,14 @@ public class StringCalculator {
     return Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
         .sum();
+  }
+
+  private static String[] getInputNumbers(String input) {
+    String delimiter = ",\n";
+    if (input.startsWith("//")) {
+      delimiter = input.substring(2, 3);
+      input = input.substring(4);
+    }
+    return input.split("[" + delimiter + "]");
   }
 }
