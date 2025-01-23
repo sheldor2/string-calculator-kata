@@ -70,4 +70,10 @@ class StringCalculatorTest {
   void shouldIgnoreNumbersGreaterThan1000() {
     assertEquals(9, StringCalculator.add("7,1001,2"));
   }
+
+  @Test
+  void shouldAddNumbersWithCustomDelimiterOfAnyLength() {
+    assertEquals(6, StringCalculator.add("//[***]\n1***2***3"));
+  }
+
 }

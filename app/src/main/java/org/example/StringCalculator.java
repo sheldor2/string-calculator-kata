@@ -3,6 +3,7 @@ package org.example;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.regex.Pattern;
 
 public class StringCalculator {
 
@@ -29,7 +30,13 @@ public class StringCalculator {
 
   private static String[] getInputNumbers(String input) {
     String delimiter = ",\n";
-    if (input.startsWith("//")) {
+    if (input.startsWith("//[")) {
+      int delimiterEndIndex = input.indexOf(']');
+      delimiter = input.substring(3, delimiterEndIndex);
+      input = input.substring(delimiterEndIndex+2);
+      return input.split(Pattern.quote(delimiter));
+    }
+    else if (input.startsWith("//")) {
       delimiter = input.substring(2, 3);
       input = input.substring(4);
     }
