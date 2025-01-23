@@ -47,11 +47,18 @@ public class StringCalculator {
     return input.startsWith("//[");
   }
 
-  private static String[] getNumbersWithMultiLengthCustomDelimiter(String input) {
-    int delimiterEndIndex = input.indexOf(']');
-    String delimiter = input.substring(3, delimiterEndIndex);
-    input = input.substring(delimiterEndIndex+2);
-    return input.split(Pattern.quote(delimiter));
+  private static String[] getNumbersWithMultiLengthCustomDelimiter(String numbersString) {
+    int delimiterEndIndex = numbersString.indexOf("\n");
+
+    String[] delimiters = numbersString.substring(3, delimiterEndIndex - 1).split(Pattern.quote("]["));
+    StringBuilder regex = new StringBuilder();
+    for (String delimiter : delimiters) {
+      regex.append(Pattern.quote(delimiter)).append("|");
+    }
+    regex.setLength(regex.length() - 1);
+
+    numbersString = numbersString.substring(delimiterEndIndex + 1);
+    return numbersString.split(regex.toString());
   }
 
   private static boolean isSingleLengthCustomDelimiter(String input) {
