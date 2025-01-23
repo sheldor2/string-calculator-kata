@@ -11,16 +11,9 @@ public class StringCalculator {
     if (input.isEmpty()) {
       return 0;
     }
-
     String[] numbers = getInputNumbers(input);
 
-    List<String> negativeNumbers = Arrays.stream(numbers)
-        .filter(number -> Integer.parseInt(number) < 0).toList();
-
-    if(!negativeNumbers.isEmpty()) {
-      Optional<String> allNegativeNumbers = negativeNumbers.stream().reduce((a, b) -> a + "," + b);
-      throw new IllegalArgumentException("negatives not allowed: " + allNegativeNumbers.get());
-    }
+    validateNegativeNumbers(numbers);
 
     return Arrays.stream(numbers)
         .mapToInt(Integer::parseInt)
@@ -28,18 +21,40 @@ public class StringCalculator {
         .sum();
   }
 
+  private static void validateNegativeNumbers(String[] numbers) {
+    List<String> negativeNumbers = Arrays.stream(numbers)
+        .filter(number -> Integer.parseInt(number) < 0).toList();
+
+    if(!negativeNumbers.isEmpty()) {
+      Optional<String> allNegativeNumbers = negativeNumbers.stream().reduce((a, b) -> a + "," + b);
+      throw new IllegalArgumentException("negatives not allowed: " + allNegativeNumbers.get());
+    }
+  }
+
   private static String[] getInputNumbers(String input) {
     String delimiter = ",\n";
-    if (input.startsWith("//[")) {
-      int delimiterEndIndex = input.indexOf(']');
-      delimiter = input.substring(3, delimiterEndIndex);
-      input = input.substring(delimiterEndIndex+2);
-      return input.split(Pattern.quote(delimiter));
+    if (isMultiLengthCustomDelimiter(input)) {
+      return getNumbersWithMultiLengthCustomDelimiter(input);
     }
-    else if (input.startsWith("//")) {
+    else if (isSingleLengthCustomDelimiter(input)) {
       delimiter = input.substring(2, 3);
       input = input.substring(4);
     }
     return input.split("[" + delimiter + "]");
+  }
+
+  private static boolean isMultiLengthCustomDelimiter(String input) {
+    return input.startsWith("//[");
+  }
+
+  private static String[] getNumbersWithMultiLengthCustomDelimiter(String input) {
+    int delimiterEndIndex = input.indexOf(']');
+    String delimiter = input.substring(3, delimiterEndIndex);
+    input = input.substring(delimiterEndIndex+2);
+    return input.split(Pattern.quote(delimiter));
+  }
+
+  private static boolean isSingleLengthCustomDelimiter(String input) {
+    return input.startsWith("//");
   }
 }
