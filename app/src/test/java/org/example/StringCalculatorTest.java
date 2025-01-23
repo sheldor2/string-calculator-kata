@@ -80,4 +80,9 @@ class StringCalculatorTest {
   void shouldAddNumbersWithMultipleCustomDelimiters() {
     assertEquals(6, StringCalculator.add("//[*][%]\n1*2%3"));
   }
+
+  @Test
+  void shouldAddNumbersWithMultipleCustomDelimitersOfAnyLength() {
+    assertEquals(6, StringCalculator.add("//[**][%%%]\n1**2%%%3"));
+  }
 }
